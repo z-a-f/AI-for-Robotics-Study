@@ -1,72 +1,8 @@
-
 #!/usr/bin/env python
 
 from math import *
 
-class Matrix():
-
-    # Initialization:
-    def __init__(self, value=[[]]):
-        assert isinstance(value, list), 'Init value should be a 2-D array: %r' % type(value)
-        assert isinstance(value[0], list), 'Init value should be a 2-D array: %r' % type(value[0])
-        self.value = value
-        self.dimx = len(value[0])
-        self.dimy = len(value)
-        if value == [[]]:
-            self.dimx = 0
-
-    # Zero matrix of a predefined size
-    def zero(self, dimx = 0, dimy = 0):
-        assert dimx >= 0 & dimy >= 0, 'Dimensions cannot be negative: %rx%r' % (dimx, dimy)
-        self.dimx = dimx
-        self.dimy = dimy
-        if dimx == 0 & dimy == 0:
-            self.value = [[]]
-        self.value = [[0 for row in xrange(dimy)] for col in xrange(dimx)]
-        # return self
-
-    def identity(self, dim):
-        assert dim >= 0, 'Dimensions cannot be negative: %r' % dimx
-        self.dimx = dim
-        self.dimy = dim
-        if dim == 0:
-            self.value = [[]]
-        self.zero(dim, dim)     # Create a zero matrix
-        for idx in xrange(dim):
-            self.value[idx][idx] = 1
-        # return self
-
-    def show(self):
-        for row in xrange(self.dimy):
-            for col in xrange(self.dimx):
-                print '%.2f\t'%self.value[row][col],
-            print ''
-
-    def value():
-        return self.value
-    
-    def __iter__(self):
-        for row in self.value:
-            yield row
-
-    def __add__(self, other):
-        assert (self.dimx == other.dimx) & (self.dimy == other.dimy), \
-            'Dimensions don\'t match: %rx%r vs. %rx%r'%(self.dimx, self.dimy, other.dimx, other.dimy)
-        res = Matrix()
-        res.zero(self.dimx, self.dimy)
-        for row in xrange(self.dimy):
-            for col in xrange(self.dimx):
-                res.value[row][col] = self.value[row][col] + other.value[row][col]
-        return res
-        
-
-""" This is the online solution
-# Write a function 'filter' that implements a multi-
-# dimensional Kalman Filter for the example given
-
-from math import *
-
-class matrix:
+class Matrix:
     
     # implements basic operations of a matrix class
     
@@ -96,7 +32,6 @@ class matrix:
             self.value = [[0 for row in range(dim)] for col in range(dim)]
             for i in range(dim):
                 self.value[i][i] = 1
-        return self
     
     def show(self):
         for i in range(self.dimx):
@@ -198,47 +133,3 @@ class matrix:
     
     def __repr__(self):
         return repr(self.value)
-
-
-########################################
-
-# Implement the filter function below
-
-def kalman_filter(x, P):
-    # Assume all variables are defined globally
-    for n in range(len(measurements)):
-        
-        # measurement update
-        z = matrix([[measurements[n]]])
-        y = z - H * x
-        S = H*P*H.transpose() + R
-        K = P * H.transpose() * S.inverse()
-        x = x + K * y
-        P = (I - K * H) * P # matrix.identity()
-        
-        # prediction
-        x = F * x + u
-        P = F * P * F.transpose()
-        
-        
-    return x,P
-
-############################################
-### use the code below to test your filter!
-############################################
-
-measurements = [1, 2, 3]    # Assume global
-
-x = matrix([[0.], [0.]]) # initial state (location and velocity)
-P = matrix([[1000., 0.], [0., 1000.]]) # initial uncertainty
-u = matrix([[0.], [0.]]) # external motion
-F = matrix([[1., 1.], [0, 1.]]) # next state function
-H = matrix([[1., 0.]]) # measurement function
-R = matrix([[1.]]) # measurement uncertainty
-I = matrix([[1., 0.], [0., 1.]]) # identity matrix
-
-print kalman_filter(x, P)
-# output should be:
-# x: [[3.9996664447958645], [0.9999998335552873]]
-# P: [[2.3318904241194827, 0.9991676099921091], [0.9991676099921067, 0.49950058263974184]]
-"""
