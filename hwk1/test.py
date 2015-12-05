@@ -6,11 +6,6 @@ import testGeneric
 import task
 
 class testSolution(testGeneric.Test):
-    def show(self,p):
-        for i in range(len(p)):
-            print p[i]
-        
-    
     def test_four_1(self):
         tsk = task.Task()
         tsk.colors = [['G', 'G', 'G'],
@@ -77,7 +72,8 @@ class testSolution(testGeneric.Test):
         tsk.sensor_right = 0.8
         tsk.p_move = 1.0
         p = tsk.solve()
-        print p
+        # print p
+        # self.show(p)
         correct_answer = (
             [[0.03333333333, 0.03333333333, 0.03333333333],
              [0.13333333333, 0.13333333333, 0.53333333333],
