@@ -77,7 +77,7 @@ class testSolution(testGeneric.Test):
         tsk.sensor_right = 0.8
         tsk.p_move = 1.0
         p = tsk.solve()
-        print p
+        # print p
         correct_answer = (
             [[0.03333333333, 0.03333333333, 0.03333333333],
              [0.13333333333, 0.13333333333, 0.53333333333],
